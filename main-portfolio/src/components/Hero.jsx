@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail } from 'lucide-react';
+import me from '../assets/me.png'
 
 const Hero = () => {
   return (
@@ -29,9 +30,9 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="hero-subtitle"
             >
-              Building intelligent systems for a smarter tomorrow.
-              Specializing in full-stack development, mobile applications,
-              and innovative web solutions.
+             I’m a full-stack developer with a passion for building intelligent systems across web and mobile. 
+             From backend logic to frontend finesse, 
+             I bring digital ideas to life.
             </motion.p>
 
             <motion.div
@@ -51,13 +52,13 @@ const Hero = () => {
               className="social-links"
             >
               <a href="https://github.com/Brendanmebson" target="_blank" rel="noopener noreferrer">
-                <Github size={24} />
+                <Github size={25} width={30}/>
               </a>
               <a href="https://www.linkedin.com/in/kamsiyochukwu-mebuge-30a484258" target="_blank" rel="noopener noreferrer">
-                <Linkedin size={24} />
+                <Linkedin size={25} width={30}/>
               </a>
               <a href="mailto:brendanmebson@gmail.com">
-                <Mail size={24} />
+                <Mail size={25} width={30}/>
               </a>
             </motion.div>
           </motion.div>
@@ -71,7 +72,16 @@ const Hero = () => {
             <div className="profile-card">
               <div className="profile-image">
                 <div className="placeholder-avatar">
-                  <span>BM</span>
+                  <img 
+                    src={me} 
+                    alt="Profile" 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover', 
+                      borderRadius: '50%' 
+                    }} 
+                  />
                 </div>
               </div>
               <div className="profile-info">

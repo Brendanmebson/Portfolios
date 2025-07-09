@@ -35,7 +35,7 @@ const Header = () => {
             whileHover={{ scale: 1.05 }}
             className="logo"
           >
-            <span className="text-gradient">Brendan.dev</span>
+            <span>Code With Brendan</span>
           </motion.div>
 
           <nav className={`nav ${isMobileMenuOpen ? 'nav-open' : ''}`}>

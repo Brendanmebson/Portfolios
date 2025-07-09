@@ -39,7 +39,7 @@ const About = () => {
         >
           <h2 className="section-title">About Me</h2>
           <p className="section-subtitle">
-            Computer Science graduate with expertise in full-stack development,
+            Software Engineering graduate with expertise in full-stack development,
             mobile applications, and modern web technologies. Passionate about
             creating innovative solutions that make a difference.
           </p>
@@ -55,7 +55,7 @@ const About = () => {
           >
             <h3>Academic Excellence</h3>
             <p>
-              Currently pursuing a Bachelor of Science in Software Engineering at
+              A Bachelor of Science in Software Engineering Degree holder at
               Babcock University (2021-2025). Actively involved in coding clubs,
               GDSC communities, and various technology events.
             </p>
@@ -107,12 +107,13 @@ const About = () => {
         .section-header {
           text-align: center;
           margin-bottom: 4rem;
+          margin-top: -2rem;
         }
 
         .section-title {
           font-size: 3rem;
           font-weight: 700;
-          margin-bottom: 1rem;
+          margin-bottom: 6rem;
           background: linear-gradient(45deg, #667eea, #764ba2);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
