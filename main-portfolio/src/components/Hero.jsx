@@ -4,6 +4,24 @@ import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail } from 'lucide-react';
 import me from '../assets/me.png'
 
+const bubbleStyle = {
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '40px',
+  height: '40px',
+  borderRadius: '50%',
+  backgroundColor: 'rgba(228, 228, 228, 0.09)', // light background, change to suit theme
+  color: '#ffffff', // icon color
+  textDecoration: 'none',
+  transition: 'all 0.3s ease',
+  boxShadow: '0 2px 6px rgba(0, 0, 0, 0.2)',
+  cursor: 'pointer'
+  ,
+};
+
+
+
 const Hero = () => {
   return (
     <section className="hero section">
@@ -21,7 +39,7 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="hero-title"
             >
-              Mebuge Kamsiyochukwu <span className="text-gradient">Brendan</span>
+              Mebuge Kamsiyochukwu <span className="text-gradient" >Brendan</span>
             </motion.h1>
 
             <motion.p
@@ -46,21 +64,33 @@ const Hero = () => {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="social-links"
-            >
-              <a href="https://github.com/Brendanmebson" target="_blank" rel="noopener noreferrer">
-                <Github size={25} width={30}/>
-              </a>
-              <a href="https://www.linkedin.com/in/kamsiyochukwu-mebuge-30a484258" target="_blank" rel="noopener noreferrer">
-                <Linkedin size={25} width={30}/>
-              </a>
-              <a href="mailto:brendanmebson@gmail.com">
-                <Mail size={25} width={30}/>
-              </a>
-            </motion.div>
+  initial={{ opacity: 0, y: 30 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8, delay: 0.8 }}
+  className="social-links"
+  style={{ display: 'flex', gap: '1rem' }} // you can customize spacing here
+>
+  <a
+    href="https://github.com/Brendanmebson"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={bubbleStyle}
+  >
+    <Github size={20} />
+  </a>
+  <a
+    href="https://www.linkedin.com/in/kamsiyochukwu-mebuge-30a484258"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={bubbleStyle}
+  >
+    <Linkedin size={20} />
+  </a>
+  <a href="mailto:brendanmebson@gmail.com" style={bubbleStyle}>
+    <Mail size={20} />
+  </a>
+</motion.div>
+
           </motion.div>
 
           <motion.div
@@ -86,7 +116,7 @@ const Hero = () => {
               </div>
               <div className="profile-info">
                 <h3>Software Engineer</h3>
-                <p>Full-Stack Developer</p>
+                <p>Full-Stack Developer / Mobile Developer</p>
                 <div className="tech-badges">
                   <span>React</span>
                   <span>Node.js</span>
@@ -100,12 +130,13 @@ const Hero = () => {
 
       <style jsx>{`
         .hero {
-          min-height: 100vh;
+          min-height: 50vh;
           display: flex;
           align-items: center;
           padding-top: 100px;
           position: relative;
           z-index: 10;
+          
         }
 
         .hero-content {
@@ -223,6 +254,10 @@ const Hero = () => {
 
           .hero-buttons .btn {
             width: 200px;
+          }
+
+          .social-links {
+            justify-content: center;
           }
         }
       `}</style>

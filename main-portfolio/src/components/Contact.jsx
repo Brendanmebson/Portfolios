@@ -2,6 +2,22 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Github, Linkedin, Send } from 'lucide-react';
 
+const bubbleStyle = {
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '40px',
+  height: '40px',
+  borderRadius: '50%',
+  backgroundColor: 'rgba(228, 228, 228, 0.09)', // light background, change to suit theme
+  color: '#ffffff', // icon color
+  textDecoration: 'none',
+  transition: 'all 0.3s ease',
+  boxShadow: '0 2px 6px rgba(0, 0, 0, 0.2)',
+  cursor: 'pointer'
+  ,
+};
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -85,17 +101,33 @@ const Contact = () => {
             
             <div className="social-links">
               <h4>Follow Me</h4>
-              <div className="social-icons">
-                <a href="https://github.com/Brendanmebson" target="_blank" rel="noopener noreferrer">
-                  <Github size={24} />
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.3 }}
+                className="social-links"
+                style={{ display: 'flex', gap: '1rem' }} // you can customize spacing here
+              >
+                <a
+                  href="https://github.com/Brendanmebson"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={bubbleStyle}
+                >
+                  <Github size={20} />
                 </a>
-                <a href="https://www.linkedin.com/in/kamsiyochukwu-mebuge-30a484258" target="_blank" rel="noopener noreferrer">
-                  <Linkedin size={24} />
+                <a
+                  href="https://www.linkedin.com/in/kamsiyochukwu-mebuge-30a484258"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={bubbleStyle}
+                >
+                  <Linkedin size={20} />
                 </a>
-                <a href="mailto:brendanmebson@gmail.com">
-                  <Mail size={24} />
+                <a href="mailto:brendanmebson@gmail.com" style={bubbleStyle}>
+                  <Mail size={20} />
                 </a>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
           

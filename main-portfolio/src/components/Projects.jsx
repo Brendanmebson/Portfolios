@@ -1,55 +1,110 @@
-
-import React from 'react';
+import React, { useState } from 'react';
+import Slider from 'react-slick';
+import Lightbox from 'react-image-lightbox';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, Image as ImageIcon } from 'lucide-react';
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "react-image-lightbox/style.css";
+
+const bubbleStyle = {
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '40px',
+  height: '40px',
+  borderRadius: '50%',
+  backgroundColor: 'rgba(228, 228, 228, 0.09)',
+  color: '#ffffff',
+  boxShadow: '0 2px 6px rgba(0, 0, 0, 0.2)',
+  cursor: 'pointer'
+};
+
+const sliderSettings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  arrows: true,
+  slidesToShow: 1,
+  slidesToScroll: 1
+};
 
 const Projects = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [images, setImages] = useState([]);
+  const [photoIndex, setPhotoIndex] = useState(0);
+  const [visibleOverlayIndex, setVisibleOverlayIndex] = useState(null);
+
+  const openViewer = (imgs, idx) => {
+    setImages(imgs);
+    setPhotoIndex(idx);
+    setIsOpen(true);
+  };
+
+  const handleHover = (index) => {
+    setVisibleOverlayIndex(index);
+    setTimeout(() => {
+      setVisibleOverlayIndex((prev) => (prev === index ? null : prev));
+    }, 1000); // 1 second
+  };
+
   const projects = [
     {
       title: "Campus Safety App & Admin Dashboard",
-      description: "A comprehensive mobile-first application for students to report emergencies, share live locations, and reach campus security with real-time monitoring dashboard.",
+      description: "Students report emergencies, share live location, and reach campus security.",
       technologies: ["React", "React Native", "Tailwind CSS", "Supabase"],
-      image: "/api/placeholder/400/250",
+      images: ["https://picsum.photos/400/250?random=101", "https://picsum.photos/400/250?random=102"],
       github: "https://github.com/Brendanmebson",
       demo: "#"
     },
     {
       title: "Weekly Report Aggregation Web App",
-      description: "ROCKVIEW system for House on The Rock to log and manage weekly CITH attendance reports with role-based access and automated report generation.",
+      description: "Attendance tracking with role‑based access and automated report generation.",
       technologies: ["MongoDB", "Express.js", "React", "Node.js"],
-      image: "/api/placeholder/400/250",
+      images: ["https://picsum.photos/400/250?random=103", "https://picsum.photos/400/250?random=104"],
       github: "https://github.com/Brendanmebson",
       demo: "#"
     },
     {
       title: "Personal Finance Tracker",
-      description: "A comprehensive webapp for creating budgets, tracking expenses, and generating financial reports with real-time API integration.",
-      technologies: ["React", "Tailwind CSS", "Financial APIs", "Chart.js"],
-      image: "/api/placeholder/400/250",
+      description: "Budget maker, expense tracker and real‑time reporting.",
+      technologies: ["React", "Tailwind CSS", "APIs", "Chart.js"],
+      images: ["https://picsum.photos/400/250?random=105", "https://picsum.photos/400/250?random=106"],
       github: "https://github.com/Brendanmebson",
       demo: "#"
     },
     {
-      title: "Real-time Messaging Application",
-      description: "A full-featured messaging app with real-time capabilities, clean UI, and seamless data synchronization built with modern technologies.",
+      title: "Real‑time Messaging App",
+      description: "Chat app with WebSockets, TypeScript, Tailwind and sleek UI.",
       technologies: ["React", "TypeScript", "Tailwind CSS", "WebSockets"],
-      image: "/api/placeholder/400/250",
+      images: [
+        "https://picsum.photos/400/250?random=107",
+        "https://picsum.photos/400/250?random=108"
+      ],
       github: "https://github.com/Brendanmebson",
       demo: "#"
     },
     {
       title: "Crypto Dashboard",
-      description: "A cryptocurrency portfolio manager with real-time price tracking, transaction history, and trading features with advanced state management.",
+      description: "Monitor crypto portfolios with live prices and charts.",
       technologies: ["TypeScript", "Tailwind CSS", "Crypto APIs", "React"],
-      image: "/api/placeholder/400/250",
+      images: [
+        "https://picsum.photos/400/250?random=109",
+        "https://picsum.photos/400/250?random=110",
+        "https://picsum.photos/400/250?random=111"
+      ],
       github: "https://github.com/Brendanmebson",
       demo: "#"
     },
     {
       title: "QR CODEx Generator",
-      description: "A clean and efficient QR code generator web application that converts text and URLs into scannable QR codes with customization options.",
+      description: "Generate customizable QR codes for URLs or text instantly.",
       technologies: ["HTML", "CSS", "JavaScript", "QR Code API"],
-      image: "/api/placeholder/400/250",
+      images: [
+        "https://picsum.photos/400/250?random=112",
+        "https://picsum.photos/400/250?random=113"
+      ],
       github: "https://github.com/Brendanmebson",
       demo: "#"
     }
@@ -58,221 +113,152 @@ const Projects = () => {
   return (
     <section id="projects" className="section">
       <div className="container">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="section-header"
-        >
+        <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }} className="section-header">
           <h2 className="section-title">Featured Projects</h2>
-          <p className="section-subtitle">
-            Explore some of my recent work spanning web development, mobile applications,
-            and full-stack solutions. Each project demonstrates my commitment to quality
-            and innovation.
-          </p>
+          <p className="section-subtitle">Explore my work in web, mobile & full‑stack tech.</p>
         </motion.div>
 
         <div className="projects-grid">
-          {projects.map((project, index) => (
+          {projects.map((p, i) => (
             <motion.div
-              key={index}
+              key={i}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
               viewport={{ once: true }}
               className="project-card"
+              onMouseEnter={() => handleHover(i)}
             >
               <div className="project-image">
-                <div className="placeholder-image">
-                  <span>📱</span>
-                </div>
-                <div className="project-overlay">
-                  <a href={project.demo} className="project-link">
-                    <ExternalLink size={20} />
-                  </a>
-                  <a href={project.github} className="project-link">
-                    <Github size={20} />
-                  </a>
-                </div>
+                <Slider {...sliderSettings}>
+                  {p.images.map((img, idx) => (
+                    <div key={idx} onClick={() => openViewer(p.images, idx)}>
+                      <img src={img} alt={`Slide ${idx}`} className="carousel-img" />
+                    </div>
+                  ))}
+                </Slider>
+
+                {visibleOverlayIndex === i && (
+                  <div className="project-overlay">
+                    <a href={p.demo} style={bubbleStyle} target="_blank" rel="noopener noreferrer"><ExternalLink size={20} /></a>
+                    <a href={p.github} style={bubbleStyle} target="_blank" rel="noopener noreferrer"><Github size={20} /></a>
+                    <div style={bubbleStyle} onClick={() => openViewer(p.images, 0)}><ImageIcon size={20} /></div>
+                  </div>
+                )}
               </div>
 
               <div className="project-content">
-               <h3>{project.title}</h3>
-               <p>{project.description}</p>
-               
-               <div className="project-tech">
-                 {project.technologies.map((tech, techIndex) => (
-                   <span key={techIndex} className="tech-tag">
-                     {tech}
-                   </span>
-                 ))}
-               </div>
-               
-               <div className="project-actions">
-                 <a href={project.demo} className="btn btn-small">
-                   Live Demo
-                 </a>
-                 <a href={project.github} className="btn btn-outline btn-small">
-                   View Code
-                 </a>
-               </div>
-             </div>
-           </motion.div>
-         ))}
-       </div>
-     </div>
-     
-     <style jsx>{`
-       .section-header {
-         text-align: center;
-         margin-bottom: 4rem;
-       }
-       
-       .section-title {
-         font-size: 3rem;
-         font-weight: 700;
-         margin-bottom: 1rem;
-         background: linear-gradient(45deg, #667eea, #764ba2);
-         -webkit-background-clip: text;
-         -webkit-text-fill-color: transparent;
-         background-clip: text;
-       }
-       
-       .section-subtitle {
-         font-size: 1.2rem;
-         opacity: 0.9;
-         max-width: 600px;
-         margin: 0 auto;
-         line-height: 1.6;
-       }
-       
-       .projects-grid {
-         display: grid;
-         grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-         gap: 2rem;
-       }
-       
-       .project-card {
-         background: rgba(255, 255, 255, 0.1);
-         backdrop-filter: blur(10px);
-         border-radius: 20px;
-         overflow: hidden;
-         border: 1px solid rgba(255, 255, 255, 0.2);
-         transition: all 0.3s ease;
-       }
-       
-       .project-card:hover {
-         transform: translateY(-10px);
-         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-       }
-       
-       .project-image {
-         position: relative;
-         height: 200px;
-         overflow: hidden;
-       }
-       
-       .placeholder-image {
-         width: 100%;
-         height: 100%;
-         background: linear-gradient(45deg, #667eea, #764ba2);
-         display: flex;
-         align-items: center;
-         justify-content: center;
-         font-size: 4rem;
-       }
-       
-       .project-overlay {
-         position: absolute;
-         top: 0;
-         left: 0;
-         right: 0;
-         bottom: 0;
-         background: rgba(0, 0, 0, 0.8);
-         display: flex;
-         align-items: center;
-         justify-content: center;
-         gap: 1rem;
-         opacity: 0;
-         transition: opacity 0.3s ease;
-       }
-       
-       .project-card:hover .project-overlay {
-         opacity: 1;
-       }
-       
-       .project-link {
-         background: rgba(255, 255, 255, 0.2);
-         padding: 0.8rem;
-         border-radius: 50%;
-         color: white;
-         transition: all 0.3s ease;
-       }
-       
-       .project-link:hover {
-         background: rgba(255, 255, 255, 0.3);
-         transform: scale(1.1);
-       }
-       
-       .project-content {
-         padding: 1.5rem;
-       }
-       
-       .project-content h3 {
-         font-size: 1.3rem;
-         margin-bottom: 0.8rem;
-         color: #667eea;
-       }
-       
-       .project-content p {
-         margin-bottom: 1rem;
-         opacity: 0.9;
-         line-height: 1.5;
-         font-size: 0.9rem;
-       }
-       
-       .project-tech {
-         display: flex;
-         flex-wrap: wrap;
-         gap: 0.5rem;
-         margin-bottom: 1.5rem;
-       }
-       
-       .tech-tag {
-         background: rgba(255, 255, 255, 0.1);
-         padding: 0.3rem 0.8rem;
-         border-radius: 15px;
-         font-size: 0.8rem;
-         border: 1px solid rgba(255, 255, 255, 0.2);
-       }
-       
-       .project-actions {
-         display: flex;
-         gap: 1rem;
-       }
-       
-       .btn-small {
-         padding: 0.8rem 1.5rem;
-         font-size: 0.9rem;
-       }
-       
-       @media (max-width: 768px) {
-         .projects-grid {
-           grid-template-columns: 1fr;
-         }
-         
-         .section-title {
-           font-size: 2rem;
-         }
-         
-         .project-actions {
-           flex-direction: column;
-         }
-       }
-     `}</style>
-   </section>
- );
+                <h3>{p.title}</h3>
+                <p>{p.description}</p>
+                <div className="project-tech">
+                  {p.technologies.map((t, ti) => (
+                    <span key={ti} className="tech-tag">{t}</span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {isOpen && (
+        <Lightbox
+          mainSrc={images[photoIndex]}
+          nextSrc={images[(photoIndex + 1) % images.length]}
+          prevSrc={images[(photoIndex + images.length - 1) % images.length]}
+          onCloseRequest={() => setIsOpen(false)}
+          onMovePrevRequest={() =>
+            setPhotoIndex((photoIndex + images.length - 1) % images.length)
+          }
+          onMoveNextRequest={() =>
+            setPhotoIndex((photoIndex + 1) % images.length)
+          }
+        />
+      )}
+
+      <style jsx>{`
+        .projects-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 2rem;
+          margin-top: 2rem;
+        }
+        .project-card {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          border-radius: 20px;
+          overflow: hidden;
+          position: relative;
+          transition: transform 0.3s ease;
+        }
+        .project-card:hover {
+          transform: translateY(-6px);
+        }
+        .project-image {
+          position: relative;
+        }
+        .carousel-img {
+          width: 100%;
+          height: 220px;
+          object-fit: cover;
+          cursor: pointer;
+        }
+        .project-overlay {
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background: rgba(0, 0, 0, 0.75);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
+          opacity: 1;
+        }
+        .project-content {
+          padding: 1.5rem;
+        }
+        .project-content h3 {
+          font-size: 1.3rem;
+          margin-bottom: 0.5rem;
+          color: #667eea;
+        }
+        .project-content p {
+          font-size: 0.95rem;
+          opacity: 0.9;
+          margin-bottom: 1rem;
+        }
+        .project-tech {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+        .tech-tag {
+          background: rgba(255, 255, 255, 0.08);
+          padding: 0.3rem 0.8rem;
+          border-radius: 12px;
+          font-size: 0.75rem;
+        }
+        .section-title {
+          font-size: 2.8rem;
+          text-align: center;
+          margin-bottom: 1rem;
+          background: linear-gradient(45deg, #667eea, #764ba2);
+          -webkit-background-clip: text;
+          color: transparent;
+          background-clip: text;
+        }
+        .section-subtitle {
+          text-align: center;
+          font-size: 1.2rem;
+          color: #ccc;
+        }
+        @media (max-width: 768px) {
+          .carousel-img {
+            height: 180px;
+          }
+        }
+      `}</style>
+    </section>
+  );
 };
 
 export default Projects;

@@ -22,7 +22,7 @@ const Footer = () => {
             className="footer-main"
           >
             <div className="footer-brand">
-              <h3>Brendan.dev</h3>
+              <h3>.CodeWithBrendan</h3>
               <p>
                 Building intelligent systems for a smarter tomorrow. 
                 Specializing in full-stack development and innovative solutions.
@@ -43,7 +43,7 @@ const Footer = () => {
               <div className="footer-section">
                 <h4>Resources</h4>
                 <ul>
-                  <li><a href="/resume.pdf" target="_blank">Download Resume</a></li>
+                  <li><a href="/resume.pdf" download >Download Resume</a></li>
                   <li><a href="https://github.com/Brendanmebson" target="_blank">GitHub Projects</a></li>
                   <li><a href="#contact">Get In Touch</a></li>
                 </ul>

@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Smartphone, Server, Database } from 'lucide-react';
+import { Code, Smartphone, Server, Database, Gamepad2, Languages } from 'lucide-react';
 
 const About = () => {
   const services = [
@@ -27,6 +26,9 @@ const About = () => {
     }
   ];
 
+  const hobbies = ["Gaming", "Guitar", "Music", "Photography", "Exploring Tech", "Augmented and Virtual Reality", "Books", "Football", "Machine Learning", "Plants", "Startup", "Video and board games", "UI/UX designing"];
+  const languages = ["English (fluent)", "Igbo (fluent)", "Yoruba (basic)", "French (beginner)"];
+
   return (
     <section id="about" className="section">
       <div className="container">
@@ -39,7 +41,7 @@ const About = () => {
         >
           <h2 className="section-title">About Me</h2>
           <p className="section-subtitle">
-            Software Engineering graduate with expertise in full-stack development,
+            A Software Engineering graduate with expertise in full-stack development,
             mobile applications, and modern web technologies. Passionate about
             creating innovative solutions that make a difference.
           </p>
@@ -56,7 +58,7 @@ const About = () => {
             <h3>Academic Excellence</h3>
             <p>
               A Bachelor of Science in Software Engineering Degree holder at
-              Babcock University (2021-2025). Actively involved in coding clubs,
+              Babcock University (2021–2025). Actively involved in coding clubs,
               GDSC communities, and various technology events.
             </p>
 
@@ -92,15 +94,52 @@ const About = () => {
                 viewport={{ once: true }}
                 className="service-card"
               >
-                <div className="service-icon">
-                  {service.icon}
-                </div>
+                <div className="service-icon">{service.icon}</div>
                 <h4>{service.title}</h4>
                 <p>{service.description}</p>
               </motion.div>
             ))}
           </motion.div>
         </div>
+
+        {/* Hobbies & Languages Section */}
+        <motion.div
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6 }}
+  viewport={{ once: true }}
+  className="extras-header"
+>
+  <h3>Extras</h3>
+</motion.div>
+
+<motion.div
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+  viewport={{ once: true }}
+  className="extras"
+>
+  <div className="extra-card">
+    <Gamepad2 size={32} />
+    <h4>Hobbies</h4>
+    <div className="pill-container">
+      {hobbies.map((hobby, i) => (
+        <span className="pill" key={i}>{hobby}</span>
+      ))}
+    </div>
+  </div>
+  <div className="extra-card">
+    <Languages size={32} />
+    <h4>Languages</h4>
+    <div className="pill-container">
+      {languages.map((lang, i) => (
+        <span className="pill" key={i}>{lang}</span>
+      ))}
+    </div>
+  </div>
+</motion.div>
+
       </div>
 
       <style jsx>{`
@@ -184,6 +223,64 @@ const About = () => {
           line-height: 1.4;
         }
 
+        .extras {
+          display: flex;
+          gap: 2rem;
+          margin-top: 4rem;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .extra-card {
+          background: rgba(255, 255, 255, 0.06);
+          padding: 1.5rem;
+          border-radius: 15px;
+          text-align: center;
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          width: 100%;
+        }
+
+        .extra-card h4 {
+          margin-top: 0.5rem;
+          color: #fff;
+          font-size: 1.1rem;
+        }
+
+        .pill-container {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          justify-content: center;
+          margin-top: 0.8rem;
+        }
+
+        .pill {
+          background: rgba(255, 255, 255, 0.08);
+          padding: 0.4rem 0.9rem;
+          border-radius: 9999px;
+          font-size: 0.8rem;
+          font-weight: 500;
+          color: white;
+          border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .extras-header {
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: -2.5rem;
+}
+
+.extras-header h3 {
+  font-size: 2.0rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+
         @media (max-width: 768px) {
           .about-content {
             grid-template-columns: 1fr;
@@ -196,6 +293,10 @@ const About = () => {
 
           .section-title {
             font-size: 2rem;
+          }
+
+          .extra-card {
+            width: 100%;
           }
         }
       `}</style>

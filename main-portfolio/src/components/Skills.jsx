@@ -1,63 +1,72 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Database } from 'lucide-react';
+
+// FontAwesome
+import {
+  FaReact, FaHtml5, FaCss3Alt, FaJs, FaNodeJs, FaGithub, FaPython,
+  FaJava, FaDocker, FaCloud, FaCode, FaGitAlt, FaMobileAlt
+} from 'react-icons/fa';
+
+// SimpleIcons
+import {
+  SiTypescript, SiTailwindcss, SiMongodb, SiExpress, SiSupabase,
+  SiPhp, SiFigma, SiKotlin, SiCplusplus
+} from 'react-icons/si';
+
+const skillCategories = [
+  {
+    title: "Frontend Development",
+    skills: [
+      { name: "React", icon: <FaReact color="#61DBFB" /> },
+      { name: "TypeScript", icon: <SiTypescript color="#3178C6" /> },
+      { name: "JavaScript", icon: <FaJs color="#F7DF1E" /> },
+      { name: "Tailwind CSS", icon: <SiTailwindcss color="#38B2AC" />, small: true },
+      { name: "HTML5", icon: <FaHtml5 color="#E34F26" /> },
+      { name: "CSS3", icon: <FaCss3Alt color="#1572B6" /> },
+    ]
+  },
+  {
+    title: "Backend Development",
+    skills: [
+      { name: "Node.js", icon: <FaNodeJs color="#339933" /> },
+      { name: "Express.js", icon: <SiExpress color="#000000" /> },
+      { name: "MongoDB", icon: <SiMongodb color="#47A248" /> },
+      { name: "Supabase", icon: <SiSupabase color="#3FCF8E" /> },
+      { name: "PHP", icon: <SiPhp color="#777BB4" /> },
+      { name: "SQL", icon: <Database color="#336791" size={22} /> },
+    ]
+  },
+  {
+    title: "Mobile Development",
+    skills: [
+      { name: "React Native", icon: <FaReact color="#61DBFB" />, small: true },
+      { name: "Kotlin", icon: <SiKotlin color="#7F52FF" /> },
+      { name: "Mobile Design", icon: <FaMobileAlt color="#A78BFA" />, small: true },
+    ]
+  },
+  {
+    title: "Programming Languages",
+    skills: [
+      { name: "Python", icon: <FaPython color="#3776AB" /> },
+      { name: "Java", icon: <FaJava color="#007396" /> },
+      { name: "C/C++", icon: <SiCplusplus color="#00599C" /> },
+    ]
+  },
+  {
+    title: "Tools & Technologies",
+    skills: [
+      { name: "GitHub", icon: <FaGithub color="#181717" /> },
+      { name: "Figma", icon: <SiFigma color="#F24E1E" /> },
+      { name: 'Git', icon: <FaGitAlt color="#F1502F" /> },
+      { name: "VS Code", icon: <FaCode color="#007ACC" /> },
+      { name: "Docker", icon: <FaDocker color="#2496ED" /> },
+      { name: "Cloud (AWS)", icon: <FaCloud color="#FF9900" />, small: true },
+    ]
+  }
+];
 
 const Skills = () => {
-  const skillCategories = [
-    {
-      title: "Frontend Development",
-      skills: [
-        { name: "React", level: 95, icon: "⚛️" },
-        { name: "TypeScript", level: 88, icon: "🔷" },
-        { name: "JavaScript", level: 92, icon: "🟨" },
-        { name: "Tailwind CSS", level: 90, icon: "🎨" },
-        { name: "HTML/CSS", level: 95, icon: "🌐" },
-        { name: "React Native", level: 85, icon: "📱" }
-      ]
-    },
-    {
-      title: "Backend Development",
-      skills: [
-        { name: "Node.js", level: 88, icon: "🟢" },
-        { name: "Express.js", level: 85, icon: "🚀" },
-        { name: "MongoDB", level: 82, icon: "🍃" },
-        { name: "Supabase", level: 80, icon: "🔥" },
-        { name: "PHP", level: 75, icon: "🐘" },
-        { name: "SQL", level: 85, icon: "🗃️" }
-      ]
-    },
-    {
-      title: "Programming Languages",
-      skills: [
-        { name: "Python", level: 85, icon: "🐍" },
-        { name: "Java", level: 82, icon: "☕" },
-        { name: "C/C++", level: 78, icon: "⚡" },
-        { name: "Kotlin", level: 75, icon: "🤖" }
-      ]
-    },
-    {
-      title: "Tools & Technologies",
-      skills: [
-        { name: "Git/GitHub", level: 90, icon: "🌿" },
-        { name: "Figma", level: 85, icon: "🎨" },
-        { name: "VS Code", level: 95, icon: "💻" },
-        { name: "VMware", level: 80, icon: "🖥️" },
-        { name: "Docker", level: 70, icon: "🐳" },
-        { name: "AWS", level: 75, icon: "☁️" }
-      ]
-    }
-  ];
-
-  const interests = [
-    "Augmented and Virtual Reality",
-    "Machine Learning",
-    "UI/UX Design",
-    "Startup Development",
-    "Books & Learning",
-    "Football",
-    "Gaming",
-    "Plant Care"
-  ];
-
   return (
     <section id="skills" className="section">
       <div className="container">
@@ -68,40 +77,29 @@ const Skills = () => {
           viewport={{ once: true }}
           className="section-header"
         >
-          <h2 className="section-title">Skills & Expertise</h2>
+          <h2 className="section-title">Skills & Tech Stack</h2>
           <p className="section-subtitle">
-            My technical proficiency across various programming languages, 
-            frameworks, and tools that enable me to build comprehensive solutions.
+            A visual lineup of the tools, languages, and frameworks I love using to bring ideas to life.
           </p>
         </motion.div>
-        
+
         <div className="skills-grid">
-          {skillCategories.map((category, categoryIndex) => (
+          {skillCategories.map((category, index) => (
             <motion.div
-              key={categoryIndex}
+              key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
               className="skill-category"
             >
               <h3>{category.title}</h3>
-              <div className="skills-list">
-                {category.skills.map((skill, skillIndex) => (
-                  <div key={skillIndex} className="skill-item">
-                    <div className="skill-header">
-                      <span className="skill-icon">{skill.icon}</span>
-                      <span className="skill-name">{skill.name}</span>
-                      <span className="skill-level">{skill.level}%</span>
-                    </div>
-                    <div className="skill-bar">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        transition={{ duration: 1, delay: skillIndex * 0.1 }}
-                        viewport={{ once: true }}
-                        className="skill-progress"
-                      />
+              <div className="skills-tiles">
+                {category.skills.map((skill, i) => (
+                  <div key={i} className="skill-tile">
+                    <div className="skill-tile-icon">{skill.icon}</div>
+                    <div className={`skill-tile-name ${skill.small ? 'small-text' : ''}`}>
+                      {skill.name}
                     </div>
                   </div>
                 ))}
@@ -109,62 +107,14 @@ const Skills = () => {
             </motion.div>
           ))}
         </div>
-        
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="interests-section"
-        >
-          <h3>Interests & Hobbies</h3>
-          <div className="interests-grid">
-            {interests.map((interest, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="interest-tag"
-              >
-                {interest}
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-        
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="languages-section"
-        >
-          <h3>Languages</h3>
-          <div className="languages-list">
-            <div className="language-item">
-              <span>English</span>
-              <span className="language-level">Native</span>
-            </div>
-            <div className="language-item">
-              <span>French</span>
-              <span className="language-level">Basic</span>
-            </div>
-            <div className="language-item">
-              <span>Igbo</span>
-              <span className="language-level">Basic</span>
-            </div>
-          </div>
-        </motion.div>
       </div>
-      
+
       <style jsx>{`
         .section-header {
           text-align: center;
           margin-bottom: 4rem;
         }
-        
+
         .section-title {
           font-size: 3rem;
           font-weight: 700;
@@ -172,9 +122,8 @@ const Skills = () => {
           background: linear-gradient(45deg, #667eea, #764ba2);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-          background-clip: text;
         }
-        
+
         .section-subtitle {
           font-size: 1.2rem;
           opacity: 0.9;
@@ -182,150 +131,90 @@ const Skills = () => {
           margin: 0 auto;
           line-height: 1.6;
         }
-        
+
         .skills-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
           gap: 2rem;
-          margin-bottom: 3rem;
         }
-        
+
         .skill-category {
-          background: rgba(255, 255, 255, 0.1);
-          backdrop-filter: blur(10px);
+          background: rgba(255, 255, 255, 0.05);
           border-radius: 20px;
           padding: 2rem;
-          border: 1px solid rgba(255, 255, 255, 0.2);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          backdrop-filter: blur(10px);
         }
-        
+
         .skill-category h3 {
           font-size: 1.5rem;
-          margin-bottom: 1.5rem;
-          color: #667eea;
           text-align: center;
-        }
-        
-        .skills-list {
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-        }
-        
-        .skill-item {
           margin-bottom: 1rem;
+          color: #fff;
         }
-        
-        .skill-header {
-          display: flex;
-          align-items: center;
-          margin-bottom: 0.5rem;
-        }
-        
-        .skill-icon {
-          margin-right: 0.5rem;
-          font-size: 1.2rem;
-        }
-        
-        .skill-name {
-          flex: 1;
-          font-weight: 500;
-        }
-        
-        .skill-level {
-          font-size: 0.9rem;
-          color: #667eea;
-          font-weight: 600;
-        }
-        
-        .skill-bar {
-          height: 6px;
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 3px;
-          overflow: hidden;
-        }
-        
-        .skill-progress {
-          height: 100%;
-          background: linear-gradient(45deg, #667eea, #764ba2);
-          border-radius: 3px;
-        }
-        
-        .interests-section,
-        .languages-section {
-          background: rgba(255, 255, 255, 0.1);
-          backdrop-filter: blur(10px);
-          border-radius: 20px;
-          padding: 2rem;
-          margin-bottom: 2rem;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .interests-section h3,
-        .languages-section h3 {
-          font-size: 1.5rem;
-          margin-bottom: 1.5rem;
-          color: #667eea;
-          text-align: center;
-        }
-        
-        .interests-grid {
+
+        .skills-tiles {
           display: flex;
           flex-wrap: wrap;
           gap: 1rem;
           justify-content: center;
         }
-        
-        .interest-tag {
-          background: rgba(255, 255, 255, 0.1);
-          padding: 0.5rem 1rem;
-          border-radius: 20px;
-          font-size: 0.9rem;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          transition: all 0.3s ease;
-        }
-        
-        .interest-tag:hover {
-          background: rgba(255, 255, 255, 0.2);
-          transform: translateY(-2px);
-        }
-        
-        .languages-list {
+
+        .skill-tile {
+          background: rgba(255, 255, 255, 0.08);
+          border-radius: 12px;
+          padding: 0.6rem;
           display: flex;
-          justify-content: space-around;
-          flex-wrap: wrap;
-          gap: 1rem;
-        }
-        
-        .language-item {
+          flex-direction: column;
+          align-items: center;
+          width: 100px;
+          height: 100px;
           text-align: center;
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          transition: transform 0.3s ease;
         }
-        
-        .language-item span:first-child {
-          display: block;
-          font-weight: 600;
+
+        .skill-tile:hover {
+          transform: translateY(-5px);
+          background: rgba(255, 255, 255, 0.15);
+        }
+
+        .skill-tile-icon {
+          font-size: 2rem;
           margin-bottom: 0.5rem;
         }
-        
-        .language-level {
-          background: rgba(255, 255, 255, 0.1);
-          padding: 0.3rem 0.8rem;
-          border-radius: 15px;
-          font-size: 0.8rem;
-          border: 1px solid rgba(255, 255, 255, 0.2);
+
+        .skill-tile-name {
+          font-size: 0.85rem;
+          color: white;
+          font-weight: 500;
+          white-space: nowrap;
         }
-        
+
+        .small-text {
+          font-size: 0.65rem;
+        }
+
         @media (max-width: 768px) {
-          .skills-grid {
-            grid-template-columns: 1fr;
-          }
-          
           .section-title {
             font-size: 2rem;
           }
-          
-          .languages-list {
-            flex-direction: column;
-            align-items: center;
+
+          .skill-tile {
+            width: 80px;
+            height: 80px;
+          }
+
+          .skill-tile-icon {
+            font-size: 1.5rem;
+          }
+
+          .skill-tile-name {
+            font-size: 0.63rem;
+          }
+
+          .small-text {
+            font-size: 0.55rem;
           }
         }
       `}</style>
