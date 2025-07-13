@@ -26,7 +26,7 @@ const About = () => {
     }
   ];
 
-  const hobbies = ["Gaming", "Guitar", "Music", "Photography", "Exploring Tech", "Augmented and Virtual Reality", "Books", "Football", "Machine Learning", "Plants", "Startup", "Video and board games", "UI/UX designing"];
+  const hobbies = ["Gaming", "Guitar", "Music", "Photography", "Exploring Tech", "Augmented and Virtual Reality", "Books", "Football", "Machine Learning", "Plants", "Startup", "Video and board games", "UI/UX designing", "Chidan"];
   const languages = ["English (fluent)", "Igbo (fluent)", "Yoruba (basic)", "French (beginner)"];
 
   return (
