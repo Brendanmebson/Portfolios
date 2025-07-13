@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import Slider from 'react-slick';
-import Lightbox from 'react-image-lightbox';
+import Lightbox from 'yet-another-react-lightbox';
+import 'yet-another-react-lightbox/styles.css';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, Image as ImageIcon } from 'lucide-react';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "react-image-lightbox/style.css";
 
 const bubbleStyle = {
   display: 'inline-flex',
@@ -102,7 +102,7 @@ const Projects = () => {
   const [hovered, setHovered] = useState(null);
 
   const openViewer = (imgs, idx) => {
-    setImages(imgs);
+    setImages(imgs.map(url => ({ src: url })));
     setPhotoIndex(idx);
     setIsOpen(true);
   };
@@ -168,12 +168,10 @@ const Projects = () => {
 
       {isOpen && (
         <Lightbox
-          mainSrc={images[photoIndex]}
-          nextSrc={images[(photoIndex + 1) % images.length]}
-          prevSrc={images[(photoIndex + images.length - 1) % images.length]}
-          onCloseRequest={() => setIsOpen(false)}
-          onMovePrevRequest={() => setPhotoIndex((photoIndex + images.length - 1) % images.length)}
-          onMoveNextRequest={() => setPhotoIndex((photoIndex + 1) % images.length)}
+          open={isOpen}
+          close={() => setIsOpen(false)}
+          index={photoIndex}
+          slides={images}
         />
       )}
 
@@ -230,7 +228,7 @@ const Projects = () => {
           border-radius: 9999px; font-size: 0.75rem; color: #fff;
         }
         .project-buttons {
-          display: flex; gap: 1rem;
+          display: flex; gap: 1rem; flex-wrap: wrap;
         }
         .section-title {
           font-size: 2.5rem;
@@ -244,7 +242,7 @@ const Projects = () => {
         }
         @media (max-width: 768px) {
           .carousel-img { height: 180px; }
-          .project-buttons { flex-direction: column; }
+          .project-buttons { flex-direction: column; gap: 0.5rem; }
         }
       `}</style>
     </section>
