@@ -55,6 +55,7 @@ const Footer = () => {
                   <li><a href="https://github.com/Brendanmebson" target="_blank">GitHub</a></li>
                   <li><a href="https://www.linkedin.com/in/kamsiyochukwu-mebuge-30a484258" target="_blank">LinkedIn</a></li>
                   <li><a href="mailto:brendanmebson@gmail.com">Email</a></li>
+                  <li><a href="https://www.instagram.com/brendanmebson/" target="_blank">Instagram</a></li>
                 </ul>
               </div>
             </div>

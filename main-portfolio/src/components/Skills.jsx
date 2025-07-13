@@ -34,7 +34,7 @@ const skillCategories = [
       { name: "MongoDB", icon: <SiMongodb color="#47A248" /> },
       { name: "Supabase", icon: <SiSupabase color="#3FCF8E" /> },
       { name: "PHP", icon: <SiPhp color="#777BB4" /> },
-      { name: "SQL", icon: <Database color="#336791" size={22} /> },
+      { name: "SQL", icon: <Database color="#E34F26" /> },
     ]
   },
   {
